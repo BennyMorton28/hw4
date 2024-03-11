@@ -1,22 +1,30 @@
 class PlacesController < ApplicationController
 
   def index
-    @places = Place.all
+    @places = @current_user.places
   end
 
   def show
-    @place = Place.find_by({ "id" => params["id"] })
-    @entries = Entry.where({ "place_id" => @place["id"] })
+    @place = @current_user.places.find_by(id: params["id"])
+    
+    if @place
+      @entries = @place.entries
+    else
+      redirect_to places_path, alert: "Place not found."
+    end
   end
 
   def new
   end
 
   def create
-    @place = Place.new
-    @place["name"] = params["name"]
-    @place.save
-    redirect_to "/places"
+    @place = @current_user.places.build(name: params["name"])
+    
+    if @place.save
+      redirect_to "/places", notice: 'Place was successfully created.'
+    else
+      render :new
+    end
   end
 
 end

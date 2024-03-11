@@ -8,6 +8,7 @@ class EntriesController < ApplicationController
     @entry["title"] = params["title"]
     @entry["description"] = params["description"]
     @entry["occurred_on"] = params["occurred_on"]
+    @entry.uploaded_image.attach(params[:uploaded_image])
     @entry["place_id"] = params["place_id"]
     @entry.save
     redirect_to "/places/#{@entry["place_id"]}"
