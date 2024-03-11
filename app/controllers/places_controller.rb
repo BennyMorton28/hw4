@@ -1,7 +1,11 @@
 class PlacesController < ApplicationController
 
   def index
-    @places = @current_user.places
+    if @current_user
+      @places = @current_user.places
+    else
+      redirect_to "/login"
+    end
   end
 
   def show

@@ -10,14 +10,16 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # gem "image_processing", ">= 1.2"
 # gem "aws-sdk-s3", require: false
 
-group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-end
 
 group :development do
-  gem "sqlite3", "~> 1.4"
   gem "tabulo"
   gem "web-console"
+end
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "sqlite3", "~> 1.4"
+
 end
 
 group :production do
